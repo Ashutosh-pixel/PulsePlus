@@ -4,11 +4,14 @@ import App from "./App.jsx";
 import "./index.css";
 import { NextUIProvider } from "@nextui-org/react";
 import { Providers } from "./component/Toggle/Providers";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <NextUIProvider>
-    <Providers>
-      <App />
-    </Providers>
-  </NextUIProvider>
+  <BrowserRouter>
+    <NextUIProvider>
+      <Providers>
+        <App />
+      </Providers>
+    </NextUIProvider>
+  </BrowserRouter>
 );
