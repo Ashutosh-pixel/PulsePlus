@@ -1,8 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { env } from "../../env";
+import { useDispatch, useSelector } from "react-redux";
 
-export const fetchnews = createAsyncThunk("fetchnews", async () => {
-  const url = env.newsurl;
+export const fetchnews = createAsyncThunk("fetchnews", async (searchquery) => {
+  console.log(searchquery);
+  const url = `https://newsapi.org/v2/everything?q=${searchquery}&sortBy=publishedAt&${env.newsurl}`;
+  console.log(url);
   try {
     const response = await fetch(url);
     return response.json();

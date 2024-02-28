@@ -21,7 +21,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    Dispatch(fetchnews());
+    Dispatch(fetchnews("bitcoin"));
   }, []);
 
   return (
