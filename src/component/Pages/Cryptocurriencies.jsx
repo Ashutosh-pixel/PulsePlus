@@ -32,7 +32,7 @@ export default function Cryptocurriencies() {
           placeholder="Search..."
           onChange={(e) => FilterCurrencies(e)}
         />
-        {state.isLoading == true ? (
+        {state.isDataLoading == true ? (
           <div>
             <h1>Loading...</h1>
           </div>
