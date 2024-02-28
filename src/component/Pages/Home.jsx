@@ -28,7 +28,7 @@ export default function Home() {
     <div className="p-4 sm:ml-64 ">
       <div className="mt-12"></div>
       Home
-      {newsstate.isNewsLoading == true ? (
+      {datastate.isDataLoading == true ? (
         <div>
           <h1>Loading...</h1>
         </div>

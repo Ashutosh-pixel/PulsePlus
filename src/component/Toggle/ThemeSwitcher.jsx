@@ -9,7 +9,7 @@ import { SunIcon } from "./SunIcon";
 
 export function ThemeSwitcher() {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, defaultTheme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
@@ -20,7 +20,7 @@ export function ThemeSwitcher() {
   return (
     <div>
       <Switch
-        defaultSelected
+        defaultSelected={defaultTheme === "light"}
         size="lg"
         color="default"
         thumbIcon={({ isSelected, className }) => {
