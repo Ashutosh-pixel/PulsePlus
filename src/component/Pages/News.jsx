@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import SearchNews from "./../Layout/SearchNews";
 
 export default function News() {
   const newsstate = useSelector((state) => state.news);
@@ -7,6 +8,7 @@ export default function News() {
     <div className="p-4 sm:ml-64 ">
       <div className="mt-12"></div>
       <h1>Global Crypto News</h1>
+      <SearchNews></SearchNews>
       {newsstate.newsdata.articles
         .slice(0, newsstate.newsdata.articles.length)
         .map((item) => {
