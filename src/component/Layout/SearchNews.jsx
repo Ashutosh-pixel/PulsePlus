@@ -15,7 +15,8 @@ export default function SearchNews({ search, setSearch }) {
     setValue(e.target.value);
   };
   const clickHandler = (searchquery) => {
-    search = searchquery;
+    const updatedquery = searchquery.replace(/\s/g, "");
+    search = updatedquery;
     setSearch(search);
   };
 
