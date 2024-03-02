@@ -23,7 +23,7 @@ export default function CryptoCard({ item }) {
 
   return (
     <div onClick={clickHandler} className=" hover:cursor-pointer">
-      <Card className="max-w-[300px]">
+      <Card className="max-w-[300px] transition-transform duration-700 ease-in-out transform hover:scale-105 hover:shadow-lg">
         <CardHeader className="flex gap-4 max-h-20">
           <Image alt="nextui logo" radius="sm" src={item.iconUrl} width={40} />
           <div className="flex flex-col">

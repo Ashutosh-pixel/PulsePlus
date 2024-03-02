@@ -116,31 +116,27 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 news-heading-container">
             {newsstate.newsdata.articles.slice(0, 6).map((item) => {
               return (
-                <div className="">
-                  <Card className="max-w-[400px]">
-                    <CardHeader className="flex justify-between align-baseline">
-                      <div className="">
-                        <span className="font-bold ">{item.title}</span>
-                      </div>
-                      <Image
-                        alt="nextui logo"
-                        radius="sm"
+                <Card className="transition-transform duration-700 ease-in-out transform hover:scale-105 hover:shadow-lg hover:cursor-pointer">
+                  <CardBody className="news-card max-w-[380px] p-4">
+                    <div className="flex justify-between">
+                      <div className=" font-semibold">{item.title}</div>
+                      <img
+                        className=" w-28 h-28 object-cover rounded-xl"
                         src={item.urlToImage}
-                        style={{ width: "20em", objectFit: "cover" }}
+                        alt=""
                       />
-                    </CardHeader>
-                    <CardBody>
-                      <p>{item.description}</p>
-                      <br />
-                      <div className="flex justify-between">
-                        {/* <p>{item.source.name}</p> */}
-                        <p className="text-red-400">
-                          {moment(item.publishedAt).startOf("ss").fromNow()}
-                        </p>
+                    </div>
+                    <div
+                      className="flex flex-col items-end
+                  "
+                    >
+                      <div className="">{item.description}</div>
+                      <div className="  text-red-400">
+                        {moment(item.publishedAt).format("hh:mm A")}
                       </div>
-                    </CardBody>
-                  </Card>
-                </div>
+                    </div>
+                  </CardBody>
+                </Card>
               );
             })}
           </div>
