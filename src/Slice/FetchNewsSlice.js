@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export const fetchnews = createAsyncThunk("fetchnews", async (searchquery) => {
   console.log(searchquery);
-  const url = `https://newsapi.org/v2/everything?q=${searchquery}&sortBy=publishedAt&${env.newsurl}`;
+  const url = `https://newsapi.org/v2/everything?q=${searchquery}&sortBy=publishedAt&language=en&${env.newsurl}`;
   console.log(url);
   try {
     const response = await fetch(url);

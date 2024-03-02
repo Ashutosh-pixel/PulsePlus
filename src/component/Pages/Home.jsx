@@ -7,6 +7,10 @@ import CryptoCard from "./CryptoCard";
 import { NavLink } from "react-router-dom";
 import { fetchnews } from "../../Slice/FetchNewsSlice";
 import News from "./News";
+import Title from "antd/es/typography/Title";
+import { Col, Statistic, Row } from "antd";
+import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
+import moment from "moment";
 
 export default function Home() {
   const datastate = useSelector((state) => state.fetch);
@@ -27,61 +31,118 @@ export default function Home() {
   return (
     <div className="p-4 sm:ml-64 ">
       <div className="mt-12"></div>
-      Home
-      {datastate.isDataLoading == true ? (
+      {datastate.isDataLoading == true || newsstate.isNewsLoading == true ? (
         <div>
           <h1>Loading...</h1>
         </div>
       ) : (
         <div>
-          <div>
-            <div>
-              <span>Total Cryptocurriencies:</span>
-              {millify(datastate.data.data.stats.totalCoins)}
-            </div>
-            <div>
-              <span>Total Markets:</span>
-              {millify(datastate.data.data.stats.totalMarkets)}
-            </div>
-            <div>
-              <span>Total Exchanges:</span>
-              {millify(datastate.data.data.stats.totalExchanges)}
-            </div>
-            <div>
-              <span>Total MarketCap:</span>
-              {millify(datastate.data.data.stats.totalMarketCap)}
-            </div>
-            <div>
-              <span>Total 24 Volume:</span>
-              {millify(datastate.data.data.stats.total24hVolume)}
-            </div>
+          <Title level={2} className="heading">
+            Global Cryptocurrency Stats
+          </Title>
+          <Row>
+            <Col span={12}>
+              <Statistic
+                title="Total Cryptocurriencies:"
+                value={millify(datastate.data.data.stats.totalCoins)}
+              ></Statistic>
+            </Col>
+            <Col span={12}>
+              <Statistic
+                title="Total Markets:"
+                value={millify(datastate.data.data.stats.totalMarkets)}
+              ></Statistic>
+            </Col>
+            <Col span={12}>
+              <Statistic
+                title="Total Exchanges:"
+                value={millify(datastate.data.data.stats.totalExchanges)}
+              ></Statistic>
+            </Col>
+            <Col span={12}>
+              <Statistic
+                title="Total MarketCap:"
+                value={millify(datastate.data.data.stats.totalMarketCap)}
+              ></Statistic>
+            </Col>
+            <Col span={12}>
+              <Statistic
+                title="Total 24 Volume:"
+                value={millify(datastate.data.data.stats.total24hVolume)}
+              ></Statistic>
+            </Col>
+          </Row>
+          <br />
+          <div
+            style={{
+              display: "flex",
+              alignItems: "baseline",
+              justifyContent: "space-between",
+            }}
+          >
+            <Title level={2} className="home-title">
+              Popular Cryptos In The World
+            </Title>
+            <Title level={4} className="show-more">
+              <NavLink to={"/Cryptocurriencies"}>Show More</NavLink>
+            </Title>
           </div>
-          <div>
-            <h1>Top 10 Cryptos In The World</h1>
-            <NavLink to={"/Cryptocurriencies"}>Show More</NavLink>
+          <br />
+
+          <div className="home-heading-container grid grid-cols-2 md:grid-cols-4 gap-4">
             {datastate.data.data.coins.slice(0, 10).map((item) => {
               return <CryptoCard item={item} key={item.rank}></CryptoCard>;
             })}
           </div>
-          <div>
-            {newsstate.isNewsLoading == true ? (
-              <div>Loading...</div>
-            ) : (
-              <div>
-                <h1>Latest News</h1>
-                <NavLink to={"/News"}>Show More</NavLink>
-                {newsstate.newsdata.articles.slice(0, 6).map((item) => {
-                  return (
-                    <>
-                      <div>{item.title}</div>
-                      <div>{item.description}</div>
-                      <div>{item.source.name}</div>
-                      <div>{item.publishedAt}</div>
-                    </>
-                  );
-                })}
-              </div>
-            )}
+
+          <br />
+
+          <div
+            style={{
+              display: "flex",
+              alignItems: "baseline",
+              justifyContent: "space-between",
+            }}
+          >
+            <Title level={2} className="news-title">
+              Latest News
+            </Title>
+            <Title level={4} className="show-more">
+              <NavLink to={"/News"}>Show More</NavLink>
+            </Title>
+          </div>
+          <br />
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 news-heading-container">
+            {newsstate.newsdata.articles.slice(0, 6).map((item) => {
+              return (
+                <div className="">
+                  <Card className="max-w-[400px]">
+                    <CardHeader className="flex justify-between align-baseline">
+                      <div className="">
+                        <span className="font-bold ">{item.title}</span>
+                      </div>
+                      <Image
+                        alt="nextui logo"
+                        radius="sm"
+                        src={item.urlToImage}
+                        style={{ width: "20em", objectFit: "cover" }}
+                      />
+                    </CardHeader>
+                    <CardBody>
+                      <p>{item.description}</p>
+                      <br />
+                      <div className="flex justify-between">
+                        {/* <p>{item.source.name}</p> */}
+                        <p className="text-red-400">
+                          {moment(item.publishedAt).startOf("ss").fromNow()}
+                        </p>
+                      </div>
+                    </CardBody>
+                  </Card>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
