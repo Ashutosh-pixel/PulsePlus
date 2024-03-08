@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchdata } from "./../../Slice/FetchDataSlice";
 import millify from "millify";
-import Cryptocurriencies from "./Cryptocurriencies";
-import CryptoCard from "./CryptoCard";
 import { NavLink } from "react-router-dom";
 import { fetchnews } from "../../Slice/FetchNewsSlice";
-import News from "./News";
 import Title from "antd/es/typography/Title";
 import { Col, Statistic, Row } from "antd";
-import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
+import { Card, CardBody } from "@nextui-org/react";
 import moment from "moment";
 
 export default function Home() {
@@ -90,9 +87,9 @@ export default function Home() {
           <br />
 
           <div className="home-heading-container grid grid-cols-2 md:grid-cols-4 gap-4">
-            {datastate.data.data.coins.slice(0, 10).map((item) => {
+            {/* {datastate.data.data.coins.slice(0, 10).map((item) => {
               return <CryptoCard item={item} key={item.rank}></CryptoCard>;
-            })}
+            })} */}
           </div>
 
           <br />

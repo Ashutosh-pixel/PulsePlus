@@ -1,28 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CryptoCard from "./CryptoCard";
-import { fetchdata } from "../../Slice/FetchDataSlice";
+import { fetchlivecoin } from "../../Slice/LiveCoinSlice";
+import millify from "millify";
+import { useNavigate } from "react-router-dom";
 import { Input } from "@nextui-org/react";
 
 export default function Cryptocurriencies() {
-  const state = useSelector((state) => state.fetch);
+  const state = useSelector((state) => state.livecoin);
   const Dispatch = useDispatch();
+  const navigate = useNavigate();
   let [updatedarray, setUpdatedArray] = useState([]);
 
-  if (state.data == null) {
-    Dispatch(fetchdata());
-  }
+  useEffect(() => {
+    Dispatch(fetchlivecoin());
+    console.log(state.data);
+  }, []);
+  // let [updatedarray, setUpdatedArray] = useState([]);
+
+  // if (state.data) {
+  //  Dispatch(fetchlivecoin());
+  // }
 
   function FilterCurrencies(event) {
     // console.log(event.target.value);
-    const updatedarray = state.data.data.coins.filter(
+    updatedarray = state.data.filter(
       (coin) =>
         coin.name.toLowerCase().includes(event.target.value.toLowerCase())
       // console.log(coin.name.toLowerCase())
     );
 
     setUpdatedArray(updatedarray);
-    console.log(updatedarray);
+  }
+
+  console.log(updatedarray);
+
+  function clickHandler(item) {
+    const updateurlname = item.name.replace(/\s/g, "");
+    navigate(`/Cryptocurriencies/${updateurlname}`);
   }
 
   return (
@@ -35,22 +49,143 @@ export default function Cryptocurriencies() {
             onChange={(e) => FilterCurrencies(e)}
           />
         </div>
-        {/* <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-          
-        </div> */}
+
         {state.isDataLoading == true ? (
-          <div>
-            <h1>Loading...</h1>
-          </div>
+          <div>Loading....</div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {updatedarray.length != 0
-              ? updatedarray.map((item) => {
-                  return <CryptoCard item={item} key={item.rank}></CryptoCard>;
-                })
-              : state.data.data.coins.map((item) => {
-                  return <CryptoCard item={item} key={item.rank}></CryptoCard>;
-                })}
+          <div class="relative overflow-x-auto rounded-lg">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+              <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-900 dark:text-gray-400">
+                <tr>
+                  <th scope="col" class="px-6 py-3">
+                    Coin
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    Price
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    Market Cap
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    Volume 24h
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    All-time High
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    1h
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    24h
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {updatedarray.length == 0
+                  ? state.data.map((item) => {
+                      return (
+                        <tr
+                          class="bg-white border-b dark:bg-slate-800 dark:border-gray-900 hover:bg-slate-700 hover:cursor-pointer"
+                          onClick={() => clickHandler(item)}
+                        >
+                          <th
+                            scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                          >
+                            <span className="flex items-center gap-2">
+                              <img src={item.png32} alt="" />
+                              <span className="">
+                                <div>{item.code}</div>
+                                <div>{item.name}</div>
+                              </span>
+                            </span>
+                          </th>
+                          <td class="px-6 py-4 dark:text-white">
+                            ${item.rate.toFixed(2)}
+                          </td>
+                          <td class="px-6 py-4 dark:text-white">
+                            ${millify(item.cap)}
+                          </td>
+                          <td class="px-6 py-4 dark:text-white">
+                            ${millify(item.volume)}
+                          </td>
+                          <td class="px-6 py-4 dark:text-white">
+                            ${item.allTimeHighUSD.toFixed(2)}
+                          </td>
+                          {(100 - item.delta.hour * 100).toFixed(2) * -1 < 0 ? (
+                            <td class="px-6 py-4 dark:text-red-500">
+                              {(100 - item.delta.hour * 100).toFixed(2) * -1}%
+                            </td>
+                          ) : (
+                            <td class="px-6 py- dark:text-green-500">
+                              {(100 - item.delta.hour * 100).toFixed(2) * -1}%
+                            </td>
+                          )}
+                          {(100 - item.delta.day * 100).toFixed(2) * -1 < 0 ? (
+                            <td class="px-6 py-4 dark:text-red-500">
+                              {(100 - item.delta.day * 100).toFixed(2) * -1}%
+                            </td>
+                          ) : (
+                            <td class="px-6 py-4 dark:text-green-500">
+                              {(100 - item.delta.day * 100).toFixed(2) * -1}%
+                            </td>
+                          )}
+                        </tr>
+                      );
+                    })
+                  : updatedarray.map((item) => {
+                      return (
+                        <tr
+                          class="bg-white border-b dark:bg-slate-800 dark:border-gray-900 hover:bg-slate-700 hover:cursor-pointer"
+                          onClick={() => clickHandler(item)}
+                        >
+                          <th
+                            scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                          >
+                            <span className="flex items-center gap-2">
+                              <img src={item.png32} alt="" />
+                              <span className="">
+                                <div>{item.code}</div>
+                                <div>{item.name}</div>
+                              </span>
+                            </span>
+                          </th>
+                          <td class="px-6 py-4 dark:text-white">
+                            ${item.rate.toFixed(2)}
+                          </td>
+                          <td class="px-6 py-4 dark:text-white">
+                            ${millify(item.cap)}
+                          </td>
+                          <td class="px-6 py-4 dark:text-white">
+                            ${millify(item.volume)}
+                          </td>
+                          <td class="px-6 py-4 dark:text-white">
+                            ${item.allTimeHighUSD.toFixed(2)}
+                          </td>
+                          {(100 - item.delta.hour * 100).toFixed(2) * -1 < 0 ? (
+                            <td class="px-6 py-4 dark:text-red-500">
+                              {(100 - item.delta.hour * 100).toFixed(2) * -1}%
+                            </td>
+                          ) : (
+                            <td class="px-6 py- dark:text-green-500">
+                              {(100 - item.delta.hour * 100).toFixed(2) * -1}%
+                            </td>
+                          )}
+                          {(100 - item.delta.day * 100).toFixed(2) * -1 < 0 ? (
+                            <td class="px-6 py-4 dark:text-red-500">
+                              {(100 - item.delta.day * 100).toFixed(2) * -1}%
+                            </td>
+                          ) : (
+                            <td class="px-6 py-4 dark:text-green-500">
+                              {(100 - item.delta.day * 100).toFixed(2) * -1}%
+                            </td>
+                          )}
+                        </tr>
+                      );
+                    })}
+              </tbody>
+            </table>
           </div>
         )}
       </div>
