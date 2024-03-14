@@ -15,18 +15,10 @@ export default function Cryptocurriencies() {
     Dispatch(fetchlivecoin());
     console.log(state.data);
   }, []);
-  // let [updatedarray, setUpdatedArray] = useState([]);
-
-  // if (state.data) {
-  //  Dispatch(fetchlivecoin());
-  // }
 
   function FilterCurrencies(event) {
-    // console.log(event.target.value);
-    updatedarray = state.data.filter(
-      (coin) =>
-        coin.name.toLowerCase().includes(event.target.value.toLowerCase())
-      // console.log(coin.name.toLowerCase())
+    updatedarray = state.data.filter((coin) =>
+      coin.name.toLowerCase().includes(event.target.value.toLowerCase())
     );
 
     setUpdatedArray(updatedarray);

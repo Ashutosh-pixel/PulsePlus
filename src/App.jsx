@@ -6,6 +6,7 @@ import Home from "./component/Pages/Home";
 import Cryptocurriencies from "./component/Pages/Cryptocurriencies";
 import Exchange from "./component/Pages/Exchange";
 import News from "./component/Pages/News";
+import CurrencyDetails from "./component/Pages/CurrencyDetails";
 
 function App() {
   return (
@@ -26,6 +27,10 @@ function App() {
         ></Route>
         <Route path="/Exchange" element={<Exchange></Exchange>}></Route>
         <Route path="/News" element={<News></News>}></Route>
+        <Route
+          path="/Cryptocurriencies/:currency"
+          element={<CurrencyDetails></CurrencyDetails>}
+        ></Route>
       </Routes>
     </div>
   );
