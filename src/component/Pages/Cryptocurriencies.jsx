@@ -27,8 +27,8 @@ export default function Cryptocurriencies() {
   console.log(updatedarray);
 
   function clickHandler(item) {
-    const updateurlname = item.name.replace(/\s/g, "");
-    navigate(`/Cryptocurriencies/${updateurlname}`);
+    // const updateurlname = item.name.replace(/\s/g, "");
+    navigate(`/Cryptocurriencies/${item.code}`);
   }
 
   return (
