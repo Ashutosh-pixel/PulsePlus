@@ -1,19 +1,32 @@
-# PulsePlus
+# Cryptoverse
 
-Your Ultimate Cryptocurrency Companion PulsePlus is a cutting-edge web app designed to keep you informed about the latest ups and downs in the cryptocurrency market. Stay ahead of the curve with real-time price updates, detailed graphs, and comprehensive information on a wide range of cryptocurrencies.
+## Description 
+- An interactive platform displaying trending cryptocurrencies, top 100 coin charts, and detailed chart patterns for individual coins.
 
+## Live Project
+https://cryptoverse-mrx8.vercel.app/
+
+## Built With
+- [React JS](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Coin-gecko API](https://www.coingecko.com/en/api)
+- [Chart JS](https://reactchartjs.github.io/react-chartjs-2/#/)
 
 ## Features
+- It displays Past Performance Display of any Crypto Coin.
+- It displays Top 100 crypto-coins by their market cap
+- It displays Top Trending coins in last 24h
+- It provides Powerful and Elegant UI interface of the Web App. 
 
-##### Real-Time Updates: Instantaneous information on cryptocurrency prices.
-##### Extensive Database: Detailed profiles and historical data for a wide range of cryptocurrencies.
-##### Interactive Graphs: Visualize market trends with user-friendly charts.
-##### News and Analysis: Stay informed with curated articles and market insights.
-##### User-Friendly Interface: Sleek design for easy navigation, suitable for all levels.
+## Learnings From the Project
+- Got Practical knowlege while Working with APIs
+- More Knowledge about React.js
+- Got Practical exposure to Tailwind css.
+- Increase in skill of styling a page and making it responsive.
+- Time Management and Resource Management.
 
-
-
-## Under Progress
-
-![Header](https://raw.githubusercontent.com/Ashutosh-pixel/Ashutosh-pixel/main/216656952-f8beff5b-935b-4157-a199-5c504b36a810.gif)
-![Header](https://raw.githubusercontent.com/Ashutosh-pixel/Ashutosh-pixel/main/ezgif.com-gif-maker.gif)
+## Screenshots
+#### Homepage
+![image](https://user-images.githubusercontent.com/78155393/227704336-9f8d89a5-4e18-4e66-9772-311fdcedd880.png)
+#### Coinpage
+![image](https://user-images.githubusercontent.com/78155393/227704313-b9134990-7be2-41df-936e-49e02faa02cd.png)
